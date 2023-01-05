@@ -1,4 +1,5 @@
 import React from "react";
+import { MdDeleteForever } from 'react-icons/md';
 
 const SubjectCard = (props) =>{
     const {subjectName, present, total} = props.subject;
@@ -21,14 +22,21 @@ const SubjectCard = (props) =>{
               } )
             
         } )
-        // window.localStorage.setItem('courses', JSON.stringify(subjects));
       }
+
+    const handleDelete = () => {
+        setSubjects(oldSubjects => oldSubjects.filter( (subject, index) => {
+            if(index!==id)
+            return subject;
+        } ))
+    }
 
     return <>
         <h1>{subjectName}</h1>
         <p>{present}/{total} {percentage}%</p>
         <button onClick={() => updateAttandence(1,id)}>present</button>
         <button onClick={()=> updateAttandence(0,id)}>absent</button>
+        <button onClick={handleDelete}> <MdDeleteForever /> </button>
     </>
 }
 
