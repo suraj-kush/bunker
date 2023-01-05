@@ -9,6 +9,7 @@ const Form = (props) => {
     }
     function handleClick(event){
         event.preventDefault();
+        if(subject==='') return;
         const newSubject = {
             subjectName: subject,
             present: 0,
