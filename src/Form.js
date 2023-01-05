@@ -1,10 +1,9 @@
 import React,{useState} from "react";
-import Subject from "./Subject";
 
 const Form = (props) => {
     const [subject, setSubject] = useState("");
-
     const {setSubjects} = props;
+
     function handleChange(event){
         setSubject(event.target.value);
     }
@@ -18,6 +17,8 @@ const Form = (props) => {
         setSubjects(oldSubjects => [...oldSubjects, newSubject]);
         setSubject('');
     }
+
+
     return (
         <>
         <input value={subject} onChange={handleChange} type='text' />
