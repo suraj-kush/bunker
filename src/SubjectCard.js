@@ -31,8 +31,8 @@ const SubjectCard = (props) => {
   }
 
   const handleDelete = () => {
-    // eslint-disable-next-line
-    setSubjects((oldSubjects) =>
+      setSubjects((oldSubjects) =>
+      // eslint-disable-next-line
       oldSubjects.filter((subject, index) => {
         if (index !== id) return subject;
       })
