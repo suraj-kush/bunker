@@ -1,57 +1,47 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import Card from '@mui/material/Card'
 
-export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
+export default function FormDialog(props) {
+  const {setAddSubject, setSubjects} = props;
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [subject, setSubject] = useState("");
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    function handleChange(event){
+        setSubject(event.target.value);
+    }
+    function handleClick(event){
+        event.preventDefault();
+        if(subject==='') return;
+        const newSubject = {
+            subjectName: subject,
+            present: 0,
+            total: 0
+          }
+        setSubjects(oldSubjects => [...oldSubjects, newSubject]);
+        setSubject('');
+        setAddSubject(false);
+    }
 
   return (
-    <div className='fixed bottom-3 right-3'>
-        <Fab size="large" color="primary" aria-label="add" >
-        <AddIcon onClick={handleClickOpen} />
-        </Fab>
-      <Dialog open={open} onClose={handleClose} style={{minWidth:"90vw"}}>
-         <Card sx={{maxWidth: 300, width: "90vw", height: 40}}>
+
+      <Dialog open={true} onClose={() => setAddSubject(false)} style={{minWidth:"90vw"}}>
+         <Card sx={{maxWidth: 300, width: "90vw", height: 85, padding: 2}}>
           <TextField
           fullWidth
+          onChange={handleChange}
           name="subjectName"
           variant='standard'
+          value={subject}
           >
-
           </TextField>
+          <div className='absolute right-0'>
+          <Button variant="text" onClick={handleClick}>Add</Button>
+          </div>
          </Card>
       </Dialog>
-    </div>
   );
 }
-
-{/* <DialogTitle>Subject</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Add</Button>
-        </DialogActions> */}

@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import Subject from './Subject'
-import Form from './Form'
 import FormDialog from './FormDialog';
-
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 
 export const App = () => {
 
   const [subjects, setSubjects]  = useState([]);
+  const [addSubject, setAddSubject] = useState(false);
 
   useEffect(() => {
     const prevData = JSON.parse(localStorage.getItem('courses'));
@@ -20,13 +21,20 @@ export const App = () => {
     localStorage.setItem('courses', JSON.stringify(subjects));
   }, [subjects]);
 
+  const handleClick = () => {
+    setAddSubject(true);
+  }
+
   return (
-    <div align="center" className="bg-gray-200 h-screen">
+    <div align="center">
     <h1 className='text-4xl text-current'>Bunker</h1>
-    {/* <Form setSubjects={setSubjects} /> */}
     <Subject subjects={subjects} setSubjects={setSubjects} />
-    {/* <FloatingButton/> */}
-    <FormDialog/>
+    <div className='fixed bottom-3 right-3'>
+      <Fab aria-label='add' color='primary'>
+        <AddIcon onClick={handleClick} />
+      </Fab>
+    </div>
+    { addSubject ? <FormDialog setAddSubject={setAddSubject} setSubjects={setSubjects} /> : null }
     </div>
   )
 }
