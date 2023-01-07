@@ -1,5 +1,9 @@
 import React from "react";
-import { MdDeleteForever } from "react-icons/md";
+import { RxCross2 } from "react-icons/rx";
+import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import {MdOutlineDone} from 'react-icons/md';
 
 const SubjectCard = (props) => {
   const { subjectName, present, total } = props.subject;
@@ -40,23 +44,22 @@ const SubjectCard = (props) => {
   };
 
   return (
-    <>
-      <h1>{subjectName}</h1>
-      <p>
-        {present}/{total} {percentage}%
-      </p>
-      <button onClick={() => updateAttandence(1, id)}>present</button>
-      <button onClick={() => updateAttandence(0, id)}>absent</button>
-      <button onClick={handleDelete}>
-        {" "}
-        <MdDeleteForever />{" "}
-      </button>
+    <Card sx={{m: 2, p: 0.5, textAlign: "center", maxWidth: 300, width: "90vw", height: 140, borderRadius: "8px"}} elevation={3}>
+      <h1 style={{margin: "0px", fontSize: "26px"}}>{subjectName}</h1>
+      <Stack justifyContent="space-evenly" direction="row" sx={{mb:1, fontWeight: 600}}>
+        <span style={{minWidth: "64px"}} >{present}/{total}</span> 
+        <span style={{minWidth: "64px"}} >{percentage}%</span>
+      </Stack>
+      <Stack justifyContent="space-evenly" direction="row">
+      <Button variant="contained" onClick={() => updateAttandence(1, id)}> <MdOutlineDone/> </Button>
+      <Button variant="contained" color="error" onClick={() => updateAttandence(0, id)}> <RxCross2/> </Button>
+      </Stack>
       {skip ? (
-        <p> You can skip next {skip} class </p>
+        <p style={{marginTop: "6px", color: "green"}}> You can skip next {skip} class </p>
       ) : (
-        <p> You can't skip next class </p>
+        <p style={{marginTop: "6px", color: "red"}}> You can't skip next class </p>
       )}
-    </>
+    </Card>
   );
 };
 

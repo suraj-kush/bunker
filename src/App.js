@@ -2,6 +2,7 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import Subject from './Subject'
 import Form from './Form'
+import FormDialog from './FormDialog';
 
 
 export const App = () => {
@@ -20,9 +21,12 @@ export const App = () => {
   }, [subjects]);
 
   return (
-    <div>
-    <Form setSubjects={setSubjects} />
+    <div align="center" className="bg-gray-200 h-screen">
+    <h1 className='text-4xl text-current'>Bunker</h1>
+    {/* <Form setSubjects={setSubjects} /> */}
     <Subject subjects={subjects} setSubjects={setSubjects} />
+    {/* <FloatingButton/> */}
+    <FormDialog/>
     </div>
   )
 }
