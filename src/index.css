@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Rowdies:wght@300;400;700&family=Source+Sans+Pro:wght@300;400;600&family=Ubuntu:wght@300;400;500&display=swap");
+
 * {
     margin: 0;
     padding: 0;
 }
+
 body {
     background-color: rgb(241 245 249);
+    /* font-family: "Roboto Mono", monospace; */
+    /* font-family: "Rowdies", cursive; */
+    /* font-family: "Source Sans Pro", sans-serif; */
+    font-family: "Ubuntu", sans-serif;
 }
