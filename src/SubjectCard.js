@@ -71,7 +71,7 @@ const SubjectCard = (props) => {
 
 
   return (
-    <div className="relative w-96">
+    <div className="relative w-11/12 max-w-md">
     <div>
         {EditFormDialog ? <EditSubjectName setEditFormDialog={setEditFormDialog}
                             setSubjects={setSubjects} intialSubjectName={subjectName}
