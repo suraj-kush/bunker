@@ -10,6 +10,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const SubjectCard = (props) => {
   const { subjectName, present, total } = props.subject;
+  // eslint-disable-next-line
   const { id, setSubjects, setAddSubject } = props;
   let percentage = 0;
   let skip = 0;
