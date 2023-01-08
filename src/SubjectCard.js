@@ -1,17 +1,18 @@
 import React from "react";
-import { RxCross2 } from "react-icons/rx";
+import {useState} from 'react';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import {MdOutlineDone} from 'react-icons/md';
 import { Menu, MenuItem, IconButton } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import EditSubjectName from "./EditSubjectName";
 
 const SubjectCard = (props) => {
   const { subjectName, present, total } = props.subject;
-  // eslint-disable-next-line
-  const { id, setSubjects, setAddSubject } = props;
+  const { id, setSubjects} = props;
+
+  const [EditFormDialog, setEditFormDialog] = useState(false);
+
   let percentage = 0;
   let skip = 0;
   if (total !== 0) {
@@ -49,7 +50,7 @@ const SubjectCard = (props) => {
   };
 
   const handleEdit = () => {
-    // setAddSubject(true);
+    setEditFormDialog(true);
     setAnchorEl(null);
   }
 
@@ -67,6 +68,11 @@ const SubjectCard = (props) => {
 
   return (
     <div className="relative w-96">
+    <div>
+        {EditFormDialog ? <EditSubjectName setEditFormDialog={setEditFormDialog}
+                            setSubjects={setSubjects} intialSubjectName={subjectName}
+                            id={id}  /> : null}
+    </div>
     <Card sx={{m: 2, p: 0.5, textAlign: "center", height: 140, borderRadius: "8px", backgroundColor: "rgb(236 254 255)"}} elevation={3}>
       <h1 style={{margin: "0px", fontSize: "26px", display: "inline-block"}}>{subjectName}</h1>
       <div className="absolute top-0 right-1">
@@ -83,6 +89,8 @@ const SubjectCard = (props) => {
         <MenuItem id="undo" onClick={handleMenuClose}>Undo</MenuItem>
         <MenuItem id="delete" onClick={handleDelete}>Delete</MenuItem>
       </Menu>
+      <div>
+      </div>
      <div>
      <Stack justifyContent="space-evenly" direction="row" sx={{mb:1, fontWeight: 600}}>
         <span style={{minWidth: "64px"}} >{present}/{total}</span> 
