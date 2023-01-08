@@ -19,24 +19,28 @@ const SubjectCard = (props) => {
     percentage = (present / total) * 100;
     percentage = percentage.toFixed(2);
   }
-  const calculateSkip = (p, t) => {
-    let temp = 4 * p - 3 * t;
+  const calculateSkip = () => {
+    let temp = 4 * present - 3 * total;
     temp /= 3;
     temp = Math.floor(temp);
-    return temp < 0 ? 0 : temp;
+    skip = temp < 0 ? 0 : temp;
   };
-  skip = calculateSkip(present, total);
-  function updateAttandence(present, key) {
+  calculateSkip();
+
+  function updateAttandence(changePresent, changeTotal) {
     setSubjects((oldSubjects) => {
       return oldSubjects.map((subject, index) => {
-        if (key === index) {
-          const newPresent = subject.present + present;
-          const newTotal = subject.total + 1;
+        if (id === index) {
+          let newPresent = subject.present + changePresent;
+          if(newPresent<0) newPresent=0;
+          let newTotal = subject.total + changeTotal;
+          if(newTotal<newPresent) newTotal = newPresent ;
           return { ...subject, present: newPresent, total: newTotal };
         }
         return subject;
       });
     });
+    handleMenuClose();
   }
 
   const handleDelete = () => {
@@ -46,12 +50,12 @@ const SubjectCard = (props) => {
         if (index !== id) return subject;
       })
     );
-    setAnchorEl(null);
+    handleMenuClose();
   };
 
   const handleEdit = () => {
     setEditFormDialog(true);
-    setAnchorEl(null);
+    handleMenuClose();
   }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -86,7 +90,8 @@ const SubjectCard = (props) => {
         onClose={handleMenuClose}
       >
         <MenuItem id="edit" onClick={handleEdit}>Edit Name</MenuItem>
-        <MenuItem id="undo" onClick={handleMenuClose}>Undo</MenuItem>
+        <MenuItem id="undo" onClick={() => updateAttandence(-1,0)}>Undo Present</MenuItem>
+        <MenuItem id="undo" onClick={() => updateAttandence(0,-1)}>Undo Total</MenuItem>
         <MenuItem id="delete" onClick={handleDelete}>Delete</MenuItem>
       </Menu>
       <div>
@@ -99,8 +104,8 @@ const SubjectCard = (props) => {
      </div>
       <div>
       <Stack justifyContent="space-evenly" direction="row">
-      <Button variant="contained" onClick={() => updateAttandence(1, id)}> P </Button>
-      <Button variant="contained" color="error" onClick={() => updateAttandence(0, id)}> A </Button>
+      <Button variant="contained" onClick={() => updateAttandence(1,1)}> P </Button>
+      <Button variant="contained" color="error" onClick={() => updateAttandence(0,1)}> A </Button>
       </Stack>
       </div>
 
