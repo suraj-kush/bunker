@@ -67,7 +67,7 @@ const SubjectCard = (props) => {
 
   return (
     <div className="relative w-96">
-    <Card sx={{m: 2, p: 0.5, textAlign: "center", height: 140, borderRadius: "8px"}} elevation={3}>
+    <Card sx={{m: 2, p: 0.5, textAlign: "center", height: 140, borderRadius: "8px", backgroundColor: "rgb(236 254 255)"}} elevation={3}>
       <h1 style={{margin: "0px", fontSize: "26px", display: "inline-block"}}>{subjectName}</h1>
       <div className="absolute top-0 right-1">
       <IconButton onClick={handleMenuClick}>
@@ -91,8 +91,8 @@ const SubjectCard = (props) => {
      </div>
       <div>
       <Stack justifyContent="space-evenly" direction="row">
-      <Button variant="contained" onClick={() => updateAttandence(1, id)}> <MdOutlineDone/> </Button>
-      <Button variant="contained" color="error" onClick={() => updateAttandence(0, id)}> <RxCross2/> </Button>
+      <Button variant="contained" onClick={() => updateAttandence(1, id)}> P </Button>
+      <Button variant="contained" color="error" onClick={() => updateAttandence(0, id)}> A </Button>
       </Stack>
       </div>
 

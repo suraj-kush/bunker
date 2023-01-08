@@ -27,7 +27,7 @@ export const App = () => {
 
   return (
     <div align="center">
-    <h1 className='text-4xl text-current'>Bunker</h1>
+    <h1 className='text-4xl text-current bg bg-blue-300'>Bunker</h1>
     <Subject subjects={subjects} setSubjects={setSubjects} setAddSubject={setAddSubject} />
     <div className='fixed bottom-3 right-3'>
       <Fab aria-label='add' color='success' onClick={handleClick}>

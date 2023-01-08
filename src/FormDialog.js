@@ -36,6 +36,8 @@ export default function FormDialog(props) {
           name="subjectName"
           variant='standard'
           value={subject}
+          placeholder="Subject Name"
+          autoComplete="off"
           >
           </TextField>
           <div className='absolute right-0'>
