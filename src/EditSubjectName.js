@@ -3,12 +3,19 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
-import Card from '@mui/material/Card'
+import Card from '@mui/material/Card';
+import DaySelector from './DaySelector';
 
 export default function EditSubjectName(props) {
-  const {setSubjects, setEditFormDialog, intialSubjectName, id} = props;
+  const {setSubjects, setEditFormDialog, singleSubject, id} = props;
+  let initialSubjectName = singleSubject.subjectName;
 
-  const [subject, setSubject] = useState(intialSubjectName);
+  const [subject, setSubject] = useState(initialSubjectName);
+  let prevArr = singleSubject.daysArr || [ ["M", false], ["T", false], ["W", false], ["Th", false],["F", false]];
+  
+  // if(!prevArr) prevArr = [ ["M", false], ["T", false], ["W", false], ["Th", false], ["F", false] ];
+
+  const [days, setDays] = useState(prevArr);
 
     function handleChange(event){
         setSubject(event.target.value);
@@ -20,7 +27,8 @@ export default function EditSubjectName(props) {
           if(id === index)
           return {
             ...subjectEle,
-            subjectName: subject
+            subjectName : subject,
+            daysArr: days
           }
           
           return subjectEle;
@@ -32,7 +40,7 @@ export default function EditSubjectName(props) {
   return (
 
       <Dialog open={true} onClose={() => setEditFormDialog(false)} style={{minWidth:"90vw"}}>
-         <Card sx={{maxWidth: 300, width: "90vw", height: 85, padding: 2}}>
+         <Card sx={{maxWidth: 300, width: "90vw", height: 122, padding: 2}}>
           <TextField
           fullWidth
           onChange={handleChange}
@@ -43,8 +51,9 @@ export default function EditSubjectName(props) {
           autoComplete="off"
           >
           </TextField>
+          <DaySelector days={days} setDays={setDays} />
           <div className='absolute right-0'>
-          <Button variant="text" onClick={handleClick}>Rename</Button>
+          <Button variant="text" onClick={handleClick}>Update</Button>
           </div>
          </Card>
       </Dialog>

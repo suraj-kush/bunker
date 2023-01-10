@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 export const App = () => {
 
   const [subjects, setSubjects]  = useState([]);
-  const [addFormDialog, setAddFormDialog] = useState(false);
+  const [addFormDialog, setAddFormDialog] = useState(true);
 
   useEffect(() => {
     const prevData = JSON.parse(localStorage.getItem('courses'));
