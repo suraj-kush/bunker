@@ -13,8 +13,6 @@ export default function EditSubjectName(props) {
   const [subject, setSubject] = useState(initialSubjectName);
   let prevArr = singleSubject.daysArr || [ ["M", false], ["T", false], ["W", false], ["Th", false],["F", false]];
   
-  // if(!prevArr) prevArr = [ ["M", false], ["T", false], ["W", false], ["Th", false], ["F", false] ];
-
   const [days, setDays] = useState(prevArr);
 
     function handleChange(event){
