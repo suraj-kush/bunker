@@ -1,15 +1,15 @@
 import React from "react";
-import {useState} from 'react';
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import { Menu, MenuItem, IconButton } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useState } from "react";
+import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { Menu, MenuItem, IconButton } from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditSubjectName from "./EditSubjectName";
 
 const SubjectCard = (props) => {
   const { subjectName, present, total } = props.subject;
-  const { id, setSubjects} = props;
+  const { id, setSubjects, subject } = props;
 
   const [EditFormDialog, setEditFormDialog] = useState(false);
 
@@ -32,9 +32,9 @@ const SubjectCard = (props) => {
       return oldSubjects.map((subject, index) => {
         if (id === index) {
           let newPresent = subject.present + changePresent;
-          if(newPresent<0) newPresent=0;
+          if (newPresent < 0) newPresent = 0;
           let newTotal = subject.total + changeTotal;
-          if(newTotal<newPresent) newTotal = newPresent ;
+          if (newTotal < newPresent) newTotal = newPresent;
           return { ...subject, present: newPresent, total: newTotal };
         }
         return subject;
@@ -44,7 +44,7 @@ const SubjectCard = (props) => {
   }
 
   const handleDelete = () => {
-      setSubjects((oldSubjects) =>
+    setSubjects((oldSubjects) =>
       // eslint-disable-next-line
       oldSubjects.filter((subject, index) => {
         if (index !== id) return subject;
@@ -56,11 +56,11 @@ const SubjectCard = (props) => {
   const handleEdit = () => {
     setEditFormDialog(true);
     handleMenuClose();
-  }
+  };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleMenuClick = event => {
+  const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -68,55 +68,101 @@ const SubjectCard = (props) => {
     setAnchorEl(null);
   };
 
-
-
   return (
     <div className="relative w-11/12 max-w-md">
-    <div>
-        {EditFormDialog ? <EditSubjectName setEditFormDialog={setEditFormDialog}
-                            setSubjects={setSubjects} intialSubjectName={subjectName}
-                            id={id}  /> : null}
-    </div>
-    <Card sx={{m: 2, p: 0.5, textAlign: "center", height: 140, borderRadius: "8px", backgroundColor: "rgb(236 254 255)"}} elevation={3}>
-      <h1 style={{margin: "0px", fontSize: "26px", display: "inline-block"}}>{subjectName}</h1>
-      <div className="absolute top-0 right-1">
-      <IconButton onClick={handleMenuClick}>
-      <MoreVertIcon />
-      </IconButton>
+      <div>
+        {EditFormDialog ? (
+          <EditSubjectName
+            setEditFormDialog={setEditFormDialog}
+            setSubjects={setSubjects}
+            singleSubject={subject}
+            id={id}
+          />
+        ) : null}
       </div>
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
+      <Card
+        sx={{
+          m: 2,
+          p: 0.5,
+          textAlign: "center",
+          height: 140,
+          borderRadius: "8px",
+          backgroundColor: "rgb(236 254 255)",
+        }}
+        elevation={3}
       >
-        <MenuItem id="edit" onClick={handleEdit}>Edit Name</MenuItem>
-        <MenuItem id="undo" onClick={() => updateAttandence(-1,0)}>Undo Present</MenuItem>
-        <MenuItem id="undo" onClick={() => updateAttandence(0,-1)}>Undo Total</MenuItem>
-        <MenuItem id="delete" onClick={handleDelete}>Delete</MenuItem>
-      </Menu>
-      <div>
-      </div>
-     <div>
-     <Stack justifyContent="space-evenly" direction="row" sx={{mb:1, fontWeight: 600}}>
-        <span style={{minWidth: "64px"}} >{present}/{total}</span> 
-        <span style={{minWidth: "64px"}} >{percentage}%</span>
-      </Stack>
-     </div>
-      <div>
-      <Stack justifyContent="space-evenly" direction="row">
-      <Button variant="contained" onClick={() => updateAttandence(1,1)}> P </Button>
-      <Button variant="contained" color="error" onClick={() => updateAttandence(0,1)}> A </Button>
-      </Stack>
-      </div>
+        <h1
+          style={{ margin: "0px", fontSize: "26px", display: "inline-block" }}
+        >
+          {subjectName}
+        </h1>
+        <div className="absolute top-0 right-1">
+          <IconButton onClick={handleMenuClick}>
+            <MoreVertIcon />
+          </IconButton>
+        </div>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+        >
+          <MenuItem id="edit" onClick={handleEdit}>
+            Edit
+          </MenuItem>
+          <MenuItem id="undo" onClick={() => updateAttandence(-1, 0)}>
+            Undo Present
+          </MenuItem>
+          <MenuItem id="undo" onClick={() => updateAttandence(0, -1)}>
+            Undo Total
+          </MenuItem>
+          <MenuItem id="delete" onClick={handleDelete} style={{color: "red"}} >
+            Delete
+          </MenuItem>
+        </Menu>
+        <div></div>
+        <div>
+          <Stack
+            justifyContent="space-evenly"
+            direction="row"
+            sx={{ mb: 1, fontWeight: 600 }}
+          >
+            <span style={{ minWidth: "64px" }}>
+              {present}/{total}
+            </span>
+            <span style={{ minWidth: "64px" }}>{percentage}%</span>
+          </Stack>
+        </div>
+        <div>
+          <Stack justifyContent="space-evenly" direction="row">
+            <Button variant="contained" onClick={() => updateAttandence(1, 1)}>
+              {" "}
+              P{" "}
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => updateAttandence(0, 1)}
+            >
+              {" "}
+              A{" "}
+            </Button>
+          </Stack>
+        </div>
 
-      <div>
-      {skip ? (
-        <p style={{marginTop: "6px", color: "green"}}> You can skip next {skip} class </p>
-      ) : (
-        <p style={{marginTop: "6px", color: "red"}}> You can't skip next class </p>
-      )}
-      </div>
-    </Card>
+        <div>
+          {skip ? (
+            <p style={{ marginTop: "6px", color: "green" }}>
+              {" "}
+              You can skip next {skip} class{" "}
+            </p>
+          ) : (
+            <p style={{ marginTop: "6px", color: "red" }}>
+              {" "}
+              You can't skip next class{" "}
+            </p>
+          )}
+        </div>
+      </Card>
     </div>
   );
 };

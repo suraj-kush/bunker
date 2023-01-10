@@ -9,6 +9,7 @@ export const App = () => {
 
   const [subjects, setSubjects]  = useState([]);
   const [addFormDialog, setAddFormDialog] = useState(false);
+  const [tab, setTab] = useState(1);
 
   useEffect(() => {
     const prevData = JSON.parse(localStorage.getItem('courses'));
@@ -24,11 +25,14 @@ export const App = () => {
   const handleClick = () => {
     setAddFormDialog(true);
   }
-
   return (
     <div align="center">
     <h1 className='text-4xl text-current bg bg-blue-300'>Bunker</h1>
-    <Subject subjects={subjects} setSubjects={setSubjects} setAddFormDialog={setAddFormDialog} />
+    <div className='flex justify-center'>
+    <button className={`mx-2.5 my-1 ${!tab ? "border-b-2 border-slate-400" :  "border-b-2 border-blue-100"} `} onClick={ () => setTab(0)}>Today</button>
+    <button className={`mx-2.5 my-1 ${ tab ? "border-b-2 border-slate-400" :  "border-b-2 border-blue-100" }`} onClick={ () => setTab(1)}>All</button>
+    </div>
+    <Subject subjects={subjects} setSubjects={setSubjects} setAddFormDialog={setAddFormDialog} tab={tab} />
     <div className='fixed bottom-3 right-3'>
       <Fab aria-label='add' color='success' onClick={handleClick}>
         <AddIcon/>
