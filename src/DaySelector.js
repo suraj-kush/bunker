@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function DaySelector(props) {
-  const {days, setDays} = props;
+  const { days, setDays } = props;
 
   function handleDayClick(id) {
     setDays((oldDays) => {
@@ -18,7 +18,9 @@ export default function DaySelector(props) {
         return (
           <div
             key={key}
-            className={`${day[1] ? "bg-emerald-300" : "bg-slate-200"} w-8 text-center rounded-full`}
+            className={`${
+              day[1] ? "bg-emerald-300" : "bg-slate-200"
+            } w-8 text-center rounded-full`}
             onClick={() => handleDayClick(index)}
           >
             <span>{day[0]}</span>
@@ -28,4 +30,3 @@ export default function DaySelector(props) {
     </div>
   );
 }
-
