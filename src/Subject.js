@@ -3,19 +3,22 @@ import SubjectCard from './SubjectCard';
 
 const Subject = (props) =>{
     const {subjects, setSubjects, setAddSubject, tab} = props;
-    let dayNumber = 0;
-
+    const d = new Date();
+    let day = d.getDay();
+    let dayNumber = day-1;
     return (
         subjects.map((subject, index) => {
             if(tab)
             return <SubjectCard key={index} id={index} subject={subject} setSubjects={setSubjects} setAddSubject={setAddSubject} />
             else {
-               const {daysArr} = subject;
+                const {daysArr} = subject;
+
+                if(!daysArr) return null;
 
                 return daysArr.map((day, ind) => {
                 if(ind===dayNumber && day[1]===true)
                 return <SubjectCard key={index} id={index} subject={subject} setSubjects={setSubjects} setAddSubject={setAddSubject} />
-                return null;
+                else  return null;
                } )
             }
         })
