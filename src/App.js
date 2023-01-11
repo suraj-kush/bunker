@@ -30,7 +30,7 @@ export const App = () => {
       <div className="flex justify-center">
         <button
           className={`mx-2.5 my-1 ${
-            !tab ? "border-b-2 border-slate-400" : "border-b-2 border-blue-100"
+            !tab ? "border-b-2 border-blue-400" : "border-b-2"
           } `}
           onClick={() => setTab(0)}
         >
@@ -38,7 +38,7 @@ export const App = () => {
         </button>
         <button
           className={`mx-2.5 my-1 ${
-            tab ? "border-b-2 border-slate-400" : "border-b-2 border-blue-100"
+            tab ? "border-b-2 border-blue-400" : "border-b-2"
           }`}
           onClick={() => setTab(1)}
         >

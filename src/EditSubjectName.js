@@ -49,7 +49,7 @@ export default function EditSubjectName(props) {
       onClose={() => setEditFormDialog(false)}
       style={{ minWidth: "90vw" }}
     >
-      <Card sx={{ maxWidth: 300, width: "90vw", height: 122, padding: 2 }}>
+      <Card sx={{ maxWidth: 300, width: "90vw", height: 122, padding: 2, paddingTop: 3 }}>
         <TextField
           fullWidth
           onChange={handleChange}

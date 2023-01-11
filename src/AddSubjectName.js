@@ -30,6 +30,7 @@ export default function AddSubjectName(props) {
       present: 0,
       total: 0,
       daysArr: days,
+      date: -1
     };
     console.log(newSubject);
     setSubjects((oldSubjects) => [...oldSubjects, newSubject]);
@@ -43,7 +44,7 @@ export default function AddSubjectName(props) {
       onClose={() => setAddFormDialog(false)}
       style={{ minWidth: "90vw" }}
     >
-      <Card sx={{ maxWidth: 300, width: "90vw", height: 122, padding: 2 }}>
+      <Card sx={{ maxWidth: 300, width: "90vw", height: 125, padding: 2, paddingTop: 3 }}>
         <TextField
           fullWidth
           onChange={handleChange}

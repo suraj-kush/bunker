@@ -18,12 +18,16 @@ const Subject = (props) => {
         />
       );
     else {
-      const { daysArr } = subject;
-
+      let { daysArr, date } = subject;
+       
       if (!daysArr) return null;
+      if(!date) date =-1;
+
+      const d = new Date();
+      let todayDate = d.getDate();
 
       return daysArr.map((day, ind) => {
-        if (ind === dayNumber && day[1] === true)
+        if (ind === dayNumber && day[1] === true && todayDate!==date)
           return (
             <SubjectCard
               key={index}
