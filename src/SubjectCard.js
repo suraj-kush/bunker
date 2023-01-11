@@ -38,8 +38,6 @@ const SubjectCard = (props) => {
 
           const d = new Date();
           let todayDate = d.getDate();
-          if(changePresent<0 || changeTotal<0 ) todayDate -= 1;
-          
           return { ...subject, present: newPresent, total: newTotal, date: todayDate };
         }
         return subject;
