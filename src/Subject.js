@@ -6,9 +6,11 @@ const Subject = (props) => {
   const d = new Date();
   let day = d.getDay();
   let dayNumber = day - 1;
+  let countSubShownToday = 0;
   return (
     <div>
-      {subjects.map((subject, index) => {
+      {
+        subjects.map((subject, index) => {
         if (tab)
           return (
             <SubjectCard
@@ -29,7 +31,8 @@ const Subject = (props) => {
           let todayDate = d.getDate();
 
           return daysArr.map((day, ind) => {
-            if (ind === dayNumber && day[1] === true && todayDate !== date)
+            if (ind === dayNumber && day[1] === true && todayDate !== date) {
+              countSubShownToday++;
               return (
                 <SubjectCard
                   key={index}
@@ -39,10 +42,15 @@ const Subject = (props) => {
                   setAddSubject={setAddSubject}
                 />
               );
-            else return null;
+            } else return null;
           });
         }
-      })}
+      })
+      }
+      {
+        ( countSubShownToday===0 && tab===0) ? <div className="mt-3">Hurray!, No class Today</div>: null
+      }
+
     </div>
   );
 };

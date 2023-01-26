@@ -143,6 +143,14 @@ const SubjectCard = (props) => {
             </Button>
             <Button
               variant="contained"
+              color="warning"
+              onClick={() => updateAttandence(0, 0)}
+            >
+              {" "}
+              C{" "}
+            </Button>
+            <Button
+              variant="contained"
               color="error"
               onClick={() => updateAttandence(0, 1)}
             >
