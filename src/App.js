@@ -4,7 +4,7 @@ import Subject from "./Subject";
 import AddSubjectName from "./AddSubjectName";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-
+import {useSwipeable} from 'react-swipeable'
 export const App = () => {
   const [subjects, setSubjects] = useState([]);
   const [addFormDialog, setAddFormDialog] = useState(false);
@@ -24,8 +24,22 @@ export const App = () => {
   const handleClick = () => {
     setAddFormDialog(true);
   };
+  const { ref: documentRef } = useSwipeable({
+    onSwipedLeft: ({ dir, event }) => {
+      setTab(1);
+    },
+    onSwipedRight: ({ dir, event }) => {
+      setTab(0);
+    },
+    preventDefaultTouchmoveEvent: true
+  });
+  // attach swipeable to document
+  useEffect(() => {
+    documentRef(document);
+  });
   return (
-    <div align="center">
+    <div>
+      <div align="center">
       <h1 className="text-4xl text-current bg bg-blue-300">Bunker</h1>
       <div className="flex justify-center">
         <button
@@ -42,7 +56,7 @@ export const App = () => {
           }`}
           onClick={() => setTab(1)}
         >
-          All
+          All Subject
         </button>
       </div>
       <Subject
@@ -62,6 +76,7 @@ export const App = () => {
           setSubjects={setSubjects}
         />
       ) : null}
+    </div>
     </div>
   );
 };
