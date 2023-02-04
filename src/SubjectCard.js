@@ -112,11 +112,11 @@ const SubjectCard = (props) => {
           <MenuItem id="edit" onClick={handleEdit}>
             Edit
           </MenuItem>
-          <MenuItem id="undo" onClick={() => updateAttandence(-1, 0)}>
+          <MenuItem id="undo" onClick={() => updateAttandence(-1, -1)}>
             Undo Present
           </MenuItem>
           <MenuItem id="undo" onClick={() => updateAttandence(0, -1)}>
-            Undo Total
+            Undo Absent
           </MenuItem>
           <MenuItem id="delete" onClick={handleDelete} style={{ color: "red" }}>
             Delete
